@@ -1,4 +1,4 @@
-package com.example.observabilityapp
+package com.example.observabilityapp.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,15 +29,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.domain.models.TimeFilter
 import com.example.domain.util.EIncidentSeverity
-import com.example.observabilityapp.components.FilterDropDown
-import com.example.observabilityapp.components.IncidentTimeSeriesChart
-import com.example.observabilityapp.components.SeverityPieChart
+import com.example.observabilityapp.R
 import com.example.presentation.main.ContractObservabilityApi
 import com.example.presentation.main.MainActions
 import org.koin.compose.koinInject
 
 @Composable
-fun MainScreen(
+fun DashboardScreen(
   modifier : Modifier = Modifier,
   innerPaddingValues : PaddingValues,
   sdk : ContractObservabilityApi = koinInject(),
@@ -59,7 +58,7 @@ fun MainScreen(
         shape = RoundedCornerShape(
           topStart = 0.dp, topEnd = 0.dp, bottomStart = 10.dp, bottomEnd = 10.dp
         ),
-        colors = androidx.compose.material3.CardDefaults.cardColors(
+        colors = CardDefaults.cardColors(
           containerColor = Color(0xFFFFA500)
         )
       ) {

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.domain.models.Metadata
 import com.example.domain.util.EIncidentSeverity
 import com.example.observabilityapp.R
-import com.example.observabilityapp.data.provideFakeIncidentTracker
+import com.example.observabilityapp.utils.provideIncidentTracker
 import com.example.presentation.main.MainActions
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -52,7 +52,7 @@ fun IncidentGeneratorButtons(
       )
       onEvent(
         MainActions.InsertIncident(
-          incident = provideFakeIncidentTracker(
+          incident = provideIncidentTracker(
             severity = EIncidentSeverity.DEBUG,
             message = "Debug Incident -> Location -> $screenName::DEBUG-Event",
             metadata = metadata
@@ -77,7 +77,7 @@ fun IncidentGeneratorButtons(
       )
       onEvent(
         MainActions.InsertIncident(
-          incident = provideFakeIncidentTracker(
+          incident = provideIncidentTracker(
             EIncidentSeverity.INFO, "Info Incident -> Location -> $screenName::INFO-Event", metadata
           ), screenName = screenName
         )
@@ -95,7 +95,7 @@ fun IncidentGeneratorButtons(
       )
       onEvent(
         MainActions.InsertIncident(
-          incident = provideFakeIncidentTracker(
+          incident = provideIncidentTracker(
             EIncidentSeverity.WARNING,
             "WARNING Incident -> Location -> $screenName::WARNING-Event",
             metadata
@@ -115,7 +115,7 @@ fun IncidentGeneratorButtons(
       )
       onEvent(
         MainActions.InsertIncident(
-          incident = provideFakeIncidentTracker(
+          incident = provideIncidentTracker(
             EIncidentSeverity.ERROR,
             "Error Incident -> Location -> $screenName::ERROR-Event",
             metadata
@@ -135,7 +135,7 @@ fun IncidentGeneratorButtons(
       )
       onEvent(
         MainActions.InsertIncident(
-          incident = provideFakeIncidentTracker(
+          incident = provideIncidentTracker(
             EIncidentSeverity.CRITICAL,
             "Critical Incident -> Location -> $screenName::CRITICAL-Event",
             metadata

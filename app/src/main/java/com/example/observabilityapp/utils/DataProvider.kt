@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalUuidApi::class)
 
-package com.example.observabilityapp.data
+package com.example.observabilityapp.utils
 
 import com.example.domain.models.IncidentTracker
 import com.example.domain.models.Metadata
@@ -9,7 +9,7 @@ import kotlin.random.Random
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-fun provideFakeIncidentTracker(severity: EIncidentSeverity, message: String, metadata: List<Metadata>) : IncidentTracker{
+fun provideIncidentTracker(severity: EIncidentSeverity, message: String, metadata: List<Metadata>) : IncidentTracker{
   return IncidentTracker(
     id = Uuid.random().toString(),
     errorCode = Random.nextInt(100, 999),

@@ -1,0 +1,94 @@
+package com.example.observabilityapp.components
+
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.observabilityapp.R
+import com.example.observabilityapp.screens.FavoritesScreen
+import com.example.observabilityapp.screens.InfoScreen
+import com.example.observabilityapp.screens.ProfileScreen
+import com.example.observabilityapp.screens.UsersScreen
+import com.example.observabilityapp.utils.AppDestinations
+import com.example.presentation.main.ContractObservabilityApi
+import com.example.presentation.main.MainActions
+import org.koin.compose.koinInject
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ObservabilityApp(api: ContractObservabilityApi = koinInject()) {
+  var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
+  val state by api.state.collectAsStateWithLifecycle()
+
+  NavigationSuiteScaffold(
+    navigationSuiteItems = {
+      AppDestinations.entries.forEach {
+        item(
+          icon = {
+            Icon(
+              it.icon, contentDescription = it.label
+            )
+          },
+          label = { Text(it.label) },
+          selected = it == currentDestination,
+          onClick = { currentDestination = it })
+      }
+    }) {
+    Scaffold(modifier = Modifier.fillMaxSize(), floatingActionButton = {
+      if(!state.isSync) {
+        ExtendedFloatingActionButton(
+          onClick = { api.onEvent(MainActions.SyncToRemote) },
+          icon = {
+            Icon(
+              painter = painterResource(R.drawable.outline_cloud_sync_24),
+              contentDescription = stringResource(R.string.sync_to_remote)
+            ) },
+          text = { Text(text = stringResource(R.string.sync_to_remote)) },
+        )
+      }
+    },
+      topBar = {
+        TopAppBar(
+          title = { Text(currentDestination.label) },
+          navigationIcon = {
+            Icon(
+              currentDestination.icon,
+              contentDescription = currentDestination.label,
+              modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+            )
+          },
+          colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+          )
+        )
+      }
+    ) { innerPadding ->
+      when (currentDestination) {
+        AppDestinations.HOME -> DashboardScreen(innerPaddingValues = innerPadding)
+        AppDestinations.FAVORITES -> FavoritesScreen(innerPaddingValues = innerPadding)
+        AppDestinations.PROFILE -> ProfileScreen(innerPaddingValues = innerPadding)
+        AppDestinations.USERS -> UsersScreen(innerPaddingValues = innerPadding)
+        AppDestinations.INFO -> InfoScreen(innerPaddingValues = innerPadding)
+      }
+    }
+  }
+}
