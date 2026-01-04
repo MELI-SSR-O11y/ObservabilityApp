@@ -12,14 +12,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.ui.res.stringResource
+import androidx.compose.material3.Card
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.domain.models.TimeFilter
@@ -46,9 +50,26 @@ fun MainScreen(
     modifier = modifier
       .fillMaxSize()
       .padding(innerPaddingValues)
-      .padding(16.dp)
+      .padding(start = 16.dp, end = 16.dp)
       .verticalScroll(rememberScrollState())
   ) {
+    if(state.screens.size <= 2) {
+      Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(
+          topStart = 0.dp, topEnd = 0.dp, bottomStart = 10.dp, bottomEnd = 10.dp
+        ),
+        colors = androidx.compose.material3.CardDefaults.cardColors(
+          containerColor = Color(0xFFFFA500)
+        )
+      ) {
+        Text(
+          textAlign = TextAlign.Center,
+          text = stringResource(R.string.info_empty_screens),
+          modifier = Modifier.fillMaxWidth().padding(4.dp)
+        )
+      }
+    }
     if(state.isLoading) {
       LinearProgressIndicator(modifier = Modifier
         .height(4.dp)

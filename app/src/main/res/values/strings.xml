@@ -18,4 +18,6 @@
 	<string name="critical">Critical</string>
 	<string name="no_incident_data_pie_chart">No hay datos suficientes para dibujar un grafico de torta.</string>
 	<string name="incident_severity_distribution">Distribucion de Incidentes por Gravedad</string>
+	<string name="info_empty_screens">Para agregar pantallas navegue en la parte inferior</string>
+
 </resources>

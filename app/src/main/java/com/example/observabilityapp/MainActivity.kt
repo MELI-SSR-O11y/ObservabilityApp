@@ -5,10 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.observabilityapp.screens.FavoritesScreen
 import com.example.observabilityapp.screens.InfoScreen
@@ -42,6 +48,7 @@ class MainActivity: ComponentActivity() {
   }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @PreviewScreenSizes
 @Composable
 fun ObservabilityAppApp(api: ContractObservabilityApi = koinInject()) {
@@ -74,7 +81,25 @@ fun ObservabilityAppApp(api: ContractObservabilityApi = koinInject()) {
           text = { Text(text = stringResource(R.string.sync_to_remote)) },
         )
       }
-    }) { innerPadding ->
+    },
+      topBar = {
+        TopAppBar(
+          title = { Text(currentDestination.label) },
+          navigationIcon = {
+            Icon(
+              currentDestination.icon,
+              contentDescription = currentDestination.label,
+              modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+            )
+          },
+          colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+          )
+        )
+      }
+    ) { innerPadding ->
       when (currentDestination) {
         AppDestinations.HOME -> MainScreen(innerPaddingValues = innerPadding)
         AppDestinations.FAVORITES -> FavoritesScreen(innerPaddingValues = innerPadding)
