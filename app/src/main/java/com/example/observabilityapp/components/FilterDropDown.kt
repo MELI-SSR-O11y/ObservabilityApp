@@ -14,16 +14,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import com.example.observabilityapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T> FilterDropDown(
+    modifier: Modifier = Modifier,
     label: String,
     items: List<T>,
     selectedItem: T?,
     onItemSelected: (T?) -> Unit,
     itemToString: (T) -> String,
-    modifier: Modifier = Modifier
+    showCleanFilter: Boolean = true
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -50,14 +54,17 @@ fun <T> FilterDropDown(
             onDismissRequest = { expanded = false },
             modifier = Modifier.fillMaxWidth()
         ) {
-            // Opción para limpiar el filtro
-            DropdownMenuItem(
-                text = { Text("All (Clear Filter)") },
-                onClick = {
+            if(showCleanFilter) {
+                DropdownMenuItem(text = {
+                    Text(
+                        stringResource(R.string.clear_filter),
+                        fontWeight = FontWeight.Bold
+                    )
+                }, onClick = {
                     onItemSelected(null)
                     expanded = false
-                }
-            )
+                })
+            }
             items.forEach { item ->
                 DropdownMenuItem(
                     text = { Text(itemToString(item)) },

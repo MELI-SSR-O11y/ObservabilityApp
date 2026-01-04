@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import androidx.compose.ui.res.stringResource
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -58,7 +58,7 @@ fun MainScreen(
     if(isLandscape) {
       Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         FilterDropDown(
-          label = "Screen",
+          label = stringResource(R.string.screen),
           items = state.screens,
           selectedItem = state.screens.find { it.id == state.activeFilter.screenId },
           onItemSelected = { onEvent(MainActions.FilterByScreen(it?.id)) },
@@ -66,7 +66,7 @@ fun MainScreen(
           modifier = Modifier.weight(1f)
         )
         FilterDropDown(
-          label = "Severity",
+          label = stringResource(R.string.severity),
           items = EIncidentSeverity.entries.toList(),
           selectedItem = state.activeFilter.severity,
           onItemSelected = { onEvent(MainActions.FilterBySeverity(it)) },
@@ -74,18 +74,19 @@ fun MainScreen(
           modifier = Modifier.weight(1f)
         )
         FilterDropDown(
-          label = "Time",
+          label = stringResource(R.string.time),
           items = TimeFilter.allFilters(),
           selectedItem = state.activeFilter.timeFilter,
           onItemSelected = { onEvent(MainActions.FilterByTime(it ?: TimeFilter.None)) },
           itemToString = { it.displayName },
-          modifier = Modifier.weight(1f)
+          modifier = Modifier.weight(1f),
+          showCleanFilter = false
         )
       }
     } else {
       Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         FilterDropDown(
-          label = "Screen",
+          label = stringResource(R.string.screen),
           items = state.screens,
           selectedItem = state.screens.find { it.id == state.activeFilter.screenId },
           onItemSelected = { onEvent(MainActions.FilterByScreen(it?.id)) },
@@ -93,7 +94,7 @@ fun MainScreen(
           modifier = Modifier.weight(1f)
         )
         FilterDropDown(
-          label = "Severity",
+          label = stringResource(R.string.severity),
           items = EIncidentSeverity.entries.toList(),
           selectedItem = state.activeFilter.severity,
           onItemSelected = { onEvent(MainActions.FilterBySeverity(it)) },
@@ -102,21 +103,22 @@ fun MainScreen(
         )
       }
       FilterDropDown(
-        label = "Time",
+        label = stringResource(R.string.time),
         items = TimeFilter.allFilters(),
         selectedItem = state.activeFilter.timeFilter,
         onItemSelected = { onEvent(MainActions.FilterByTime(it ?: TimeFilter.None)) },
         itemToString = { it.displayName },
         modifier = Modifier
           .fillMaxWidth()
-          .padding(top = 8.dp)
+          .padding(top = 8.dp),
+        showCleanFilter = false
       )
     }
 
     Spacer(modifier = Modifier.height(16.dp))
 
-    Text(text = "Screens: ${state.screensQuantity}")
-    Text(text = "Incidents: ${state.incidentsQuantity}")
+    Text(text = stringResource(R.string.screens_quantity, state.screensQuantity))
+    Text(text = stringResource(R.string.incidents_quantity, state.incidentsQuantity))
     Spacer(modifier = Modifier.height(16.dp))
 
     if(isLandscape) {
