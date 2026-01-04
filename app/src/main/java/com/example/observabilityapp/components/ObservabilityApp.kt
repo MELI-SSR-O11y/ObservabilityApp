@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.observabilityapp.R
+import com.example.observabilityapp.screens.DashboardScreen
 import com.example.observabilityapp.screens.FavoritesScreen
 import com.example.observabilityapp.screens.InfoScreen
 import com.example.observabilityapp.screens.ProfileScreen

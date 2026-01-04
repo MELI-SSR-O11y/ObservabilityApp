@@ -1,4 +1,4 @@
-package com.example.observabilityapp.components
+package com.example.observabilityapp.screens
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +30,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.domain.models.TimeFilter
 import com.example.domain.util.EIncidentSeverity
 import com.example.observabilityapp.R
+import com.example.observabilityapp.components.FilterDropDown
+import com.example.observabilityapp.components.IncidentTimeSeriesChart
+import com.example.observabilityapp.components.SeverityPieChart
 import com.example.presentation.main.ContractObservabilityApi
 import com.example.presentation.main.MainActions
 import org.koin.compose.koinInject
@@ -128,9 +131,7 @@ fun DashboardScreen(
         selectedItem = state.activeFilter.timeFilter,
         onItemSelected = { onEvent(MainActions.FilterByTime(it ?: TimeFilter.None)) },
         itemToString = { it.displayName },
-        modifier = Modifier
-          .fillMaxWidth()
-          .padding(top = 8.dp),
+        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
         showCleanFilter = false
       )
     }
