@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">Observability App</string>
+	<string name="sync_to_remote">Sincronizar</string>
 </resources>

@@ -70,6 +70,7 @@ dependencies {
   implementation(libs.koin.compose.viewmodel)
   implementation(libs.androidx.room.runtime)
   implementation(libs.bundles.ktor.common)
+  implementation(libs.touchlab.kermit)
   implementation(libs.sqlite.bundled)
   kapt(libs.androidx.room.compiler)
 }

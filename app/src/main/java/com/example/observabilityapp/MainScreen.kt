@@ -1,7 +1,10 @@
 package com.example.observabilityapp
 
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,28 +16,27 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import android.content.res.Configuration
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import com.example.domain.models.IncidentTracker
 import com.example.domain.models.TimeFilter
 import com.example.domain.util.EIncidentSeverity
 import com.example.observabilityapp.components.FilterDropDown
 import com.example.observabilityapp.components.IncidentTimeSeriesChart
 import com.example.observabilityapp.components.SeverityPieChart
-import com.example.presentation.main.ContractViewModel
+import com.example.presentation.main.ContractObservabilityApi
 import com.example.presentation.main.MainActions
-import org.koin.compose.viewmodel.koinViewModel
+import org.koin.compose.koinInject
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier, innerPaddingValues : PaddingValues) {
-  val sdk: ContractViewModel = koinViewModel()
+fun MainScreen(
+  modifier : Modifier = Modifier,
+  innerPaddingValues : PaddingValues,
+  sdk : ContractObservabilityApi = koinInject(),
+) {
   val state by sdk.state.collectAsStateWithLifecycle()
   val onEvent = sdk::onEvent
   val configuration = LocalConfiguration.current
@@ -47,12 +49,13 @@ fun MainScreen(modifier: Modifier = Modifier, innerPaddingValues : PaddingValues
       .padding(16.dp)
       .verticalScroll(rememberScrollState())
   ) {
-    if (state.isLoading) {
-      LinearProgressIndicator(modifier = Modifier.height(4.dp).fillMaxWidth())
+    if(state.isLoading) {
+      LinearProgressIndicator(modifier = Modifier
+        .height(4.dp)
+        .fillMaxWidth())
     }
 
-    // Filter Section (Adaptive)
-    if (isLandscape) {
+    if(isLandscape) {
       Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         FilterDropDown(
           label = "Screen",
@@ -104,7 +107,9 @@ fun MainScreen(modifier: Modifier = Modifier, innerPaddingValues : PaddingValues
         selectedItem = state.activeFilter.timeFilter,
         onItemSelected = { onEvent(MainActions.FilterByTime(it ?: TimeFilter.None)) },
         itemToString = { it.displayName },
-        modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(top = 8.dp)
       )
     }
 
@@ -114,9 +119,13 @@ fun MainScreen(modifier: Modifier = Modifier, innerPaddingValues : PaddingValues
     Text(text = "Incidents: ${state.incidentsQuantity}")
     Spacer(modifier = Modifier.height(16.dp))
 
-    // Charts Section (Adaptive)
-    if (isLandscape) {
-      Row(Modifier.fillMaxWidth().height(300.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    if(isLandscape) {
+      Row(
+        Modifier
+          .fillMaxWidth()
+          .height(300.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+      ) {
         Box(modifier = Modifier.weight(1f)) { SeverityPieChart(state) }
         Box(modifier = Modifier.weight(1f)) { IncidentTimeSeriesChart(state) }
       }
@@ -128,27 +137,5 @@ fun MainScreen(modifier: Modifier = Modifier, innerPaddingValues : PaddingValues
 
     Spacer(modifier = Modifier.height(24.dp))
 
-    Button(onClick = { onEvent(MainActions.InsertScreen("Pantalla 2")) }) {
-      Text("Add Screen")
-    }
-    Button(onClick = {
-      onEvent(
-        MainActions.InsertIncident(
-          IncidentTracker(
-            errorCode = 500,
-            message = "Servidor",
-            severity = EIncidentSeverity.DEBUG,
-            pkScreen = "081b05e6-7709-40b8-bbed-7b05958f6432",
-            timestamp = System.currentTimeMillis(),
-            metadata = listOf(com.example.domain.models.Metadata(key = "key", value = "value"))
-          ), "Pantalla 2"
-        )
-      )
-    }) {
-      Text("Add Event")
-    }
-    Button(onClick = { onEvent(MainActions.SyncToRemote) }) {
-      Text("Sync To Remote")
-    }
   }
 }
