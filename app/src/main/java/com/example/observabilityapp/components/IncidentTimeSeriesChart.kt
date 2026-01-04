@@ -1,6 +1,7 @@
 package com.example.observabilityapp.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,13 +12,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.observabilityapp.R
 import com.example.presentation.main.MainState
 import java.time.Duration
 import java.time.Instant
@@ -46,7 +52,13 @@ fun IncidentTimeSeriesChart(state: MainState, modifier: Modifier = Modifier) {
     }
 
   if (incidentsToDisplay.size < 2) {
-    Text("Not enough data for time series chart with current filters.", modifier = modifier.padding(vertical = 32.dp))
+    Card(modifier = modifier.padding(32.dp)) {
+      Text(
+        text = stringResource(R.string.not_enough_data_for_time_series),
+        modifier = modifier.padding( 12.dp),
+        textAlign = TextAlign.Center,
+      )
+    }
     return
   }
 
@@ -63,7 +75,13 @@ fun IncidentTimeSeriesChart(state: MainState, modifier: Modifier = Modifier) {
   }
 
   if (incidentsByTime.size < 2) {
-    Text("Data points are not distinct enough to draw a line chart.", modifier = modifier.padding(vertical = 32.dp))
+    Card(modifier = modifier.padding(32.dp)) {
+      Text(
+        text = stringResource(R.string.data_points_not_distinct),
+        modifier = modifier.padding( 12.dp),
+        textAlign = TextAlign.Center,
+      )
+    }
     return
   }
 
@@ -74,7 +92,7 @@ fun IncidentTimeSeriesChart(state: MainState, modifier: Modifier = Modifier) {
   val yAxisLabelWidth = 40.dp
 
   Column(modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-    Text("Incidents Over Time", style = MaterialTheme.typography.titleMedium)
+    Text(stringResource(R.string.incidents_over_time), style = MaterialTheme.typography.titleMedium)
     Spacer(modifier = Modifier.height(16.dp))
 
     Row(modifier = Modifier.fillMaxWidth().height(200.dp)) {
@@ -85,7 +103,7 @@ fun IncidentTimeSeriesChart(state: MainState, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.SpaceBetween
       ) {
         Text(maxIncidents.toString(), style = MaterialTheme.typography.bodySmall)
-        Text("0", style = MaterialTheme.typography.bodySmall)
+        Text(stringResource(R.string.zero), style = MaterialTheme.typography.bodySmall)
       }
 
       // Chart Canvas

@@ -7,4 +7,8 @@
 	<string name="screens_quantity">Pantallas: %d</string>
 	<string name="incidents_quantity">Incidentes: %d</string>
 	<string name="clear_filter">Limpiar Filtro</string>
+	<string name="not_enough_data_for_time_series">No hay suficientes datos para el gráfico de tiempo con los filtros actuales.</string>
+	<string name="data_points_not_distinct">No hay suficientes puntos.</string>
+	<string name="incidents_over_time">Incidentes VS Tiempo</string>
+	<string name="zero">0</string>
 </resources>
