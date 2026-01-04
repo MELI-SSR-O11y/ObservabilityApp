@@ -33,15 +33,15 @@ import com.example.observabilityapp.R
 import com.example.observabilityapp.components.FilterDropDown
 import com.example.observabilityapp.components.IncidentTimeSeriesChart
 import com.example.observabilityapp.components.SeverityPieChart
-import com.example.presentation.main.ContractObservabilityApi
+import com.example.presentation.main.ContractViewModel
 import com.example.presentation.main.MainActions
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DashboardScreen(
   modifier : Modifier = Modifier,
   innerPaddingValues : PaddingValues,
-  sdk : ContractObservabilityApi = koinInject(),
+  sdk : ContractViewModel = koinViewModel(),
 ) {
   val state by sdk.state.collectAsStateWithLifecycle()
   val onEvent = sdk::onEvent
@@ -71,11 +71,6 @@ fun DashboardScreen(
           modifier = Modifier.fillMaxWidth().padding(4.dp)
         )
       }
-    }
-    if(state.isLoading) {
-      LinearProgressIndicator(modifier = Modifier
-        .height(4.dp)
-        .fillMaxWidth())
     }
 
     if(isLandscape) {
