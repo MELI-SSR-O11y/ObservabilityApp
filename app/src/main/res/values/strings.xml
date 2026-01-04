@@ -20,4 +20,10 @@
 	<string name="incident_severity_distribution">Distribucion de Incidentes por Gravedad</string>
 	<string name="info_empty_screens">Para agregar pantallas navegue en la parte inferior</string>
 
+	<string name="add_debug_incidentt">Agregar Incidente Debug</string>
+	<string name="add_info_incident">Agregar Incidente Info</string>
+	<string name="add_warning_incident">Agregar Incidente Warning</string>
+	<string name="add_error_incident">Agregar Incidente Error</string>
+	<string name="add_critical_incident">Agregar Incidente Critico</string>
+
 </resources>
