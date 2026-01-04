@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Favorite
@@ -21,7 +20,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.example.observabilityapp.ui.theme.ObservabilityAppTheme
 
@@ -57,9 +55,7 @@ fun ObservabilityAppApp() {
       }
     }) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-      Greeting(
-        name = "Android", modifier = Modifier.padding(innerPadding)
-      )
+      MainScreen(innerPaddingValues = innerPadding)
     }
   }
 }
@@ -73,19 +69,4 @@ enum class AppDestinations(
     Icons.Default.Favorite
   ),
   PROFILE("Profile", Icons.Default.AccountBox),
-}
-
-@Composable
-fun Greeting(name : String, modifier : Modifier = Modifier) {
-  Text(
-    text = "Hello $name!", modifier = modifier
-  )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-  ObservabilityAppTheme {
-    Greeting("Android")
-  }
 }
