@@ -11,4 +11,11 @@
 	<string name="data_points_not_distinct">No hay suficientes puntos.</string>
 	<string name="incidents_over_time">Incidentes VS Tiempo</string>
 	<string name="zero">0</string>
+	<string name="debug">Debug</string>
+	<string name="info">Info</string>
+	<string name="warning">Warning</string>
+	<string name="error">Error</string>
+	<string name="critical">Critical</string>
+	<string name="no_incident_data_pie_chart">No hay datos suficientes para dibujar un grafico de torta.</string>
+	<string name="incident_severity_distribution">Distribucion de Incidentes por Gravedad</string>
 </resources>

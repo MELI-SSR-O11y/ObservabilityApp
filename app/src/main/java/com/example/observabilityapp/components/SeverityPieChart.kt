@@ -11,32 +11,42 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.observabilityapp.R
 import com.example.presentation.main.MainState
 
 @Composable
 fun SeverityPieChart(state: MainState, modifier: Modifier = Modifier) {
   val severityData = listOfNotNull(
-    if (state.debugSeverityQuantity > 0) PieChartData("Debug", state.debugSeverityQuantity, Color.Gray) else null,
-    if (state.infoSeverityQuantity > 0) PieChartData("Info", state.infoSeverityQuantity, Color.Blue) else null,
-    if (state.warningSeverityQuantity > 0) PieChartData("Warning", state.warningSeverityQuantity, Color(0xFFFFA500)) else null, // Naranja
-    if (state.errorSeverityQuantity > 0) PieChartData("Error", state.errorSeverityQuantity, Color.Red) else null,
-    if (state.criticalSeverityQuantity > 0) PieChartData("Critical", state.criticalSeverityQuantity, Color(0xFF8B0000)) else null // Rojo Oscuro
+    if (state.debugSeverityQuantity > 0) PieChartData(stringResource(R.string.debug), state.debugSeverityQuantity, Color.Gray) else null,
+    if (state.infoSeverityQuantity > 0) PieChartData(stringResource(R.string.info), state.infoSeverityQuantity, Color.Blue) else null,
+    if (state.warningSeverityQuantity > 0) PieChartData(stringResource(R.string.warning), state.warningSeverityQuantity, Color(0xFFFFA500)) else null, // Naranja
+    if (state.errorSeverityQuantity > 0) PieChartData(stringResource(R.string.error), state.errorSeverityQuantity, Color.Red) else null,
+    if (state.criticalSeverityQuantity > 0) PieChartData(stringResource(R.string.critical), state.criticalSeverityQuantity, Color(0xFF8B0000)) else null // Rojo Oscuro
   )
 
   if (severityData.isEmpty()) {
-    Text("No incident data for pie chart.", modifier = modifier.padding(vertical = 32.dp))
+    Card(modifier = modifier.padding(32.dp)) {
+      Text(
+        text = stringResource(R.string.no_incident_data_pie_chart),
+        modifier = modifier.padding( 12.dp),
+        textAlign = TextAlign.Center,
+      )
+    }
     return
   }
 
   Column(modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-    Text("Incident Severity Distribution", style = MaterialTheme.typography.titleMedium)
+    Text(stringResource(R.string.incident_severity_distribution), style = MaterialTheme.typography.titleMedium)
     Spacer(modifier = Modifier.height(16.dp))
 
     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
