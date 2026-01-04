@@ -15,7 +15,7 @@ fun provideIncidentTracker(severity: EIncidentSeverity, message: String, metadat
     errorCode = Random.nextInt(100, 999),
     message = message,
     severity = severity,
-    pkScreen = "",
+    screenId = "",
     timestamp = System.currentTimeMillis(),
     metadata = metadata
   )
