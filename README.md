@@ -1,6 +1,6 @@
 # Observability App - SDK Consumer
 
-Este proyecto es una aplicación de Android que sirve como **capa de presentación y entorno de pruebas** para un SDK de observabilidad. La aplicación está construida con Jetpack Compose y Kotlin, y su propósito principal es demostrar y validar las funcionalidades del SDK, que se encarga de monitorear y visualizar incidentes.
+Este proyecto es una aplicación de Android que sirve como **capa de presentación y entorno de pruebas** para un SDK de observabilidad. La aplicación está construida con Jetpack Compose y Kotlin, y su propósito principal es demostrar y validar las funcionalidades del SDK, que se encarga de monitorear y visualizar incidentes. Esta versión de prueba está lista para ser compilada y ejecutada en un dispositivo o emulador para realizar pruebas inmediatas del SDK.
 
 ## El SDK de Observabilidad
 
