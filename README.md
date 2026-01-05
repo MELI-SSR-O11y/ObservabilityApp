@@ -2,6 +2,12 @@
 
 Este proyecto es una aplicación de Android que sirve como **capa de presentación y entorno de pruebas** para un SDK de observabilidad. La aplicación está construida con Jetpack Compose y Kotlin, y su propósito principal es demostrar y validar las funcionalidades del SDK. Esta aplicación de demostración está completamente configurada y lista para ser compilada. Puede ser instalada directamente en un dispositivo o emulador para comenzar a probar las funcionalidades del SDK de manera inmediata.
 
+## Capturas de Pantalla
+
+| Pantalla Principal (Dashboard) | Pantalla de Generación de Incidentes |
+| :---: | :---: |
+| <img src="images/dashboard.png" width="300"/> | <img src="images/favorites.png" width="300"/> |
+
 ## El SDK de Observabilidad
 
 El núcleo de la funcionalidad no reside en esta aplicación, sino en un conjunto de artefactos que componen el SDK. Esta aplicación es simplemente un **consumidor** de dicho SDK.
