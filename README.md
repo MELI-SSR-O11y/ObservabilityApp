@@ -4,9 +4,9 @@ Este proyecto es una aplicación de Android que sirve como **capa de presentaci�
 
 ## Capturas de Pantalla
 
-|             Pantalla Principal (Dashboard)              |    Pantalla de Generación de Incidentes     |
-|:-------------------------------------------------------:|:-------------------------------------------:|
-| <img src="images/dashboard-enumerado.jpg" width="300"/> | <img src="images/screens.jpg" width="300"/> |
+|             Pantalla Principal (Dashboard)             |    Pantalla de Generación de Incidentes     |
+|:------------------------------------------------------:|:-------------------------------------------:|
+| <img src="images/dashboard-enumerado.jpg" width="350"/> | <img src="images/screens.jpg" width="300"/> |
 
 ## El SDK de Observabilidad
 
