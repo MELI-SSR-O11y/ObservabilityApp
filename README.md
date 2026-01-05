@@ -122,3 +122,29 @@ La aplicación incluye cuatro pantallas adicionales (`Favorites`, `Profile`, `Us
     -   **Botón "Add Critical Incident"**: Invoca `onEvent(MainActions.InsertIncident(EIncidentSeverity.CRITICAL))`.
 
     Esta funcionalidad permite a los desarrolladores generar rápidamente un conjunto de datos diverso para validar que los incidentes se almacenan correctamente y se visualizan como corresponde en la pantalla del Dashboard.
+
+## Próximos Pasos
+
+A continuación, se detallan algunas de las mejoras planificadas para futuras versiones de la aplicación de prueba y el SDK:
+
+-   **Mejorar el Gráfico de Serie Temporal**: Aunque el gráfico actual muestra los datos correctamente, no se adapta dinámicamente a grandes variaciones en los rangos de tiempo. Se planea aumentar su resolución para que la línea sea más continua. Para ello, se podría optimizar la implementación actual con `Canvas` o integrar una librería de terceros especializada en gráficos.
+
+-   **Optimizar la Experiencia de Usuario (UX)**: Los botones para sincronizar (subir y descargar datos) pueden ser confusos sin un contexto claro. Se propone hacerlos más descriptivos, ya sea con mejores iconos o etiquetas de texto, para asegurar que su importante funcionalidad no sea pasada por alto.
+
+-   **Automatizar la Sincronización en Segundo Plano**: Implementar una solución de sincronización automática utilizando `WorkManager`. Este se encargaría de verificar periódicamente si existen datos locales sin sincronizar y reintentaría enviarlos al servidor, incluso si la aplicación no está en primer plano sin la necesidad de recurrir a los botones con los que actualemnte se soluciona esta situación.
+
+## Post mortem
+
+La decisión de crear un proyecto consumidor secundario, independiente del SDK, fue **acertada para simular un entorno de producción** y demostrar la integración real de los artefactos `.aar`. Sin embargo, este enfoque presentó algunos desafíos:
+
+-   **Retos en el Flujo de Desarrollo**: El ciclo de desarrollo se vio ralentizado por la necesidad de copiar manualmente los artefactos, sincronizar el proyecto y compilar la aplicación consumidora tras cada cambio en el SDK.
+
+-   **Beneficios de la Arquitectura Desacoplada**: A pesar de los desafíos, el enfoque resultó muy beneficioso al **demostrar que el SDK puede funcionar de manera totalmente desacoplada** de la capa de presentación. Esto valida que la arquitectura es modular, escalable y no introduce dependencias no deseadas en la aplicación que lo consume.
+
+### Soluciones y Mejoras Propuestas
+
+Para optimizar el flujo de trabajo en el futuro, se podrían considerar dos enfoques:
+
+1.  **Desarrollo como Módulo Integrado**: Para agilizar el desarrollo, la aplicación consumidora podría agregarse temporalmente como un módulo dentro del proyecto principal del SDK. Esto permitiría una compilación y depuración mucho más rápidas. Sin embargo, es crucial mantener el enfoque de que el objetivo final del SDK es ser integrado en proyectos más grandes y completamente independientes.
+
+2.  **Uso de Herramientas de Versionamiento**: Una solución más robusta y escalable es utilizar una herramienta de gestión de artefactos como **JFrog Artifactory**. Esto automatizaría la publicación y el consumo de las versiones del SDK, eliminando la necesidad de copiar archivos manualmente y simulando de manera más precisa cómo se manejan las dependencias en un entorno profesional. Este enfoque se detalla más en la documentación del propio SDK.
