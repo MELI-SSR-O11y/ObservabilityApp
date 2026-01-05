@@ -97,7 +97,17 @@ Esta pantalla es el principal campo de pruebas para las funcionalidades de visua
 -   **Gráficos**: Demuestra la capacidad del SDK para procesar y agrupar datos para visualizaciones complejas, como el gráfico de torta (`SeverityPieChart`) y el de serie temporal (`IncidentTimeSeriesChart`).
 -   **Sincronización**: Permite probar las acciones `SyncToRemote` y `RollbackFromRemote` del SDK, validando la interacción con el backend y la gestión del estado de sincronización (`state.isSync`).
 
-### Otras Pantallas
+### Pantallas de Prueba y Depuración
 
--   **Favoritos (`FavoritesScreen`)**: Es una pantalla de depuración para probar la funcionalidad de **registro de incidentes** del SDK. Contiene botones que invocan `onEvent(MainActions.InsertIncident(...))` con cada nivel de severidad.
--   **Otras Pantallas (Perfil, Usuarios, etc.)**: Sirven para probar el registro de navegación del SDK, invocando a `onEvent(MainActions.InsertScreen(...))` cada vez que se accede a ellas.
+La aplicación incluye cuatro pantallas adicionales (`Favorites`, `Profile`, `Users`, `Info`) que cumplen dos propósitos principales para probar el SDK:
+
+1.  **Prueba de Registro de Navegación**: Todas estas pantallas prueban la capacidad del SDK para rastrear la navegación del usuario. Al entrar en cada una de ellas por primera vez, se ejecuta un `LaunchedEffect` que invoca la acción `onEvent(MainActions.InsertScreen("Nombre de la Pantalla"))`. Esto permite verificar que el SDK registra correctamente la visita a una nueva pantalla en su base de datos local.
+
+2.  **Prueba de Registro de Incidentes (Pantalla de Favoritos)**: La pantalla `FavoritesScreen` está diseñada específicamente para generar datos de prueba. Contiene cinco botones, cada uno dedicado a registrar un incidente con un nivel de severidad diferente:
+    -   **Botón "Add Debug Incident"**: Invoca `onEvent(MainActions.InsertIncident(EIncidentSeverity.DEBUG))`.
+    -   **Botón "Add Info Incident"**: Invoca `onEvent(MainActions.InsertIncident(EIncidentSeverity.INFO))`.
+    -   **Botón "Add Warning Incident"**: Invoca `onEvent(MainActions.InsertIncident(EIncidentSeverity.WARNING))`.
+    -   **Botón "Add Error Incident"**: Invoca `onEvent(MainActions.InsertIncident(EIncidentSeverity.ERROR))`.
+    -   **Botón "Add Critical Incident"**: Invoca `onEvent(MainActions.InsertIncident(EIncidentSeverity.CRITICAL))`.
+
+    Esta funcionalidad permite a los desarrolladores generar rápidamente un conjunto de datos diverso para validar que los incidentes se almacenan correctamente y se visualizan como corresponde en la pantalla del Dashboard.
