@@ -6,7 +6,7 @@ Este proyecto es una aplicación de Android que sirve como **capa de presentaci�
 
 |             Pantalla Principal (Dashboard)              |    Pantalla de Generación de Incidentes     |
 |:-------------------------------------------------------:|:-------------------------------------------:|
-| <img src="images/dashboard-enumerado.png" width="300"/> | <img src="images/screens.png" width="300"/> |
+| <img src="images/dashboard-enumerado.jpg" width="300"/> | <img src="images/screens.jpg" width="300"/> |
 
 ## El SDK de Observabilidad
 
