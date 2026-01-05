@@ -13,6 +13,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -39,6 +40,12 @@ fun ObservabilityApp(api: ContractObservabilityApi = koinInject()) {
   var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
   val state by api.state.collectAsStateWithLifecycle()
   val onEvent = api::onEvent
+
+  LaunchedEffect(Unit) {
+    if(!state.isLoading && state.screens.isEmpty()) {
+      onEvent(MainActions.RollbackFromRemote)
+    }
+  }
 
   NavigationSuiteScaffold(
     navigationSuiteItems = {
