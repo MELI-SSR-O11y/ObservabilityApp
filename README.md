@@ -4,9 +4,9 @@ Este proyecto es una aplicación de Android que sirve como **capa de presentaci�
 
 ## Capturas de Pantalla
 
-|             Pantalla Principal (Dashboard)             |    Pantalla de Generación de Incidentes     |
-|:------------------------------------------------------:|:-------------------------------------------:|
-| <img src="images/dashboard-enumerado.jpg" width="350"/> | <img src="images/screens.jpg" width="300"/> |
+|             Pantalla Principal (Dashboard)              |    Pantalla de Generación de Incidentes     |
+|:-------------------------------------------------------:|:-------------------------------------------:|
+| <img src="images/dashboard-enumerado.jpg" width="375"/> | <img src="images/screens.jpg" width="300"/> |
 
 ## El SDK de Observabilidad
 
@@ -96,12 +96,17 @@ fun ObservabilityApp(api: ContractObservabilityApi = koinInject()) {
 
 ### Pantalla Principal (Dashboard)
 
-Esta pantalla es el principal campo de pruebas para las funcionalidades de visualización del SDK. Muestra los datos recopilados y permite interactuar con ellos.
+La pantalla principal es el centro de visualización y pruebas del SDK. Las funcionalidades clave, como se muestra en la captura de pantalla, son:
 
--   **Filtros**: Permite probar la lógica de filtrado del SDK por pantalla, severidad y tiempo.
--   **Métricas**: Valida que los contadores de pantallas e incidentes expuestos por el SDK (`state.screensQuantity`, `state.incidentsQuantity`) se actualizan correctamente.
--   **Gráficos**: Demuestra la capacidad del SDK para procesar y agrupar datos para visualizaciones complejas, como el gráfico de torta (`SeverityPieChart`) y el de serie temporal (`IncidentTimeSeriesChart`).
--   **Sincronización**: Permite probar las acciones `SyncToRemote` y `RollbackFromRemote` del SDK, validando la interacción con el backend y la gestión del estado de sincronización (`state.isSync`).
+1.  **Icono de Sincronización (Descarga)**: Ubicado en la barra de herramientas superior, este icono permite sincronizar y descargar todos los datos que se han enviado previamente al backend, reemplazando la información local.
+2.  **Sección de Filtros**: Permite probar la lógica de filtrado del SDK. Incluye menús desplegables para filtrar los incidentes por:
+    *   **Pantalla**: Muestra solo incidentes de una pantalla específica.
+    *   **Gravedad**: Filtra por niveles como Debug, Info, Error, etc.
+    *   **Tiempo**: Muestra incidentes dentro de un período de tiempo determinado (ej. última hora, último día).
+3.  **Sección de Gráficos**: Demuestra la capacidad del SDK para procesar y visualizar datos complejos:
+    *   **Gráfico de Torta (`SeverityPieChart`)**: Muestra la distribución porcentual de los incidentes según su severidad.
+    *   **Gráfico de Serie Temporal (`IncidentTimeSeriesChart`)**: Visualiza cómo ha variado la cantidad de incidentes a lo largo del tiempo.
+4.  **Botón Flotante de Sincronización (Subida)**: Este botón (`Floating Action Button`) aparece únicamente cuando hay cambios locales (nuevos incidentes o pantallas) que no se han enviado al backend. Al presionarlo, se envían todos los datos pendientes (Seguirá visible hasta que el backend responda a las peticiones y se sincronicen los datos).
 
 ### Pantallas de Prueba y Depuración
 
