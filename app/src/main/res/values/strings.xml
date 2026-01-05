@@ -1,3 +1,29 @@
 <resources>
 	<string name="app_name">Observability App</string>
+	<string name="sync_to_remote">Subir\nDatos</string>
+	<string name="screen">Filtrar por Pantallas</string>
+	<string name="severity">Filtrar por Gravedad</string>
+	<string name="time">Filtrar por Hora</string>
+	<string name="screens_quantity">Pantallas: %d</string>
+	<string name="incidents_quantity">Incidentes: %d</string>
+	<string name="clear_filter">Limpiar Filtro</string>
+	<string name="not_enough_data_for_time_series">No hay suficientes datos para el gráfico de tiempo con los filtros actuales.</string>
+	<string name="data_points_not_distinct">No hay suficientes puntos.</string>
+	<string name="incidents_over_time">Incidentes VS Tiempo</string>
+	<string name="zero">0</string>
+	<string name="debug">Debug</string>
+	<string name="info">Info</string>
+	<string name="warning">Warning</string>
+	<string name="error">Error</string>
+	<string name="critical">Critical</string>
+	<string name="no_incident_data_pie_chart">No hay datos suficientes para dibujar un grafico de torta.</string>
+	<string name="incident_severity_distribution">Distribucion de Incidentes por Gravedad</string>
+	<string name="info_empty_screens">Para agregar pantallas navegue en la parte inferior</string>
+
+	<string name="add_debug_incidentt">Agregar Incidente Debug</string>
+	<string name="add_info_incident">Agregar Incidente Info</string>
+	<string name="add_warning_incident">Agregar Incidente Warning</string>
+	<string name="add_error_incident">Agregar Incidente Error</string>
+	<string name="add_critical_incident">Agregar Incidente Critico</string>
+
 </resources>
