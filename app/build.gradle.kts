@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
+  alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -39,6 +40,13 @@ android {
 }
 
 dependencies {
+  /**
+   * Modulos del SDK
+   */
+  implementation(files("libs/data-dev.aar"))
+  implementation(files("libs/domain-dev.aar"))
+  implementation(files("libs/presentation-dev.aar"))
+
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
@@ -55,4 +63,14 @@ dependencies {
   androidTestImplementation(libs.androidx.compose.ui.test.junit4)
   debugImplementation(libs.androidx.compose.ui.tooling)
   debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+  /**
+   * Compilacion
+   */
+  implementation(libs.koin.compose.viewmodel)
+  implementation(libs.androidx.room.runtime)
+  implementation(libs.bundles.ktor.common)
+  implementation(libs.touchlab.kermit)
+  implementation(libs.sqlite.bundled)
+  kapt(libs.androidx.room.compiler)
 }
