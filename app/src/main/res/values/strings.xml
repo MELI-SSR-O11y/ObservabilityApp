@@ -1,6 +1,6 @@
 <resources>
 	<string name="app_name">Observability App</string>
-	<string name="sync_to_remote">Sincronizar</string>
+	<string name="sync_to_remote">Subir\nDatos</string>
 	<string name="screen">Filtrar por Pantallas</string>
 	<string name="severity">Filtrar por Gravedad</string>
 	<string name="time">Filtrar por Hora</string>

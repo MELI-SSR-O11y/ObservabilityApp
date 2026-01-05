@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -37,6 +38,7 @@ import org.koin.compose.koinInject
 fun ObservabilityApp(api: ContractObservabilityApi = koinInject()) {
   var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
   val state by api.state.collectAsStateWithLifecycle()
+  val onEvent = api::onEvent
 
   NavigationSuiteScaffold(
     navigationSuiteItems = {
@@ -79,7 +81,19 @@ fun ObservabilityApp(api: ContractObservabilityApi = koinInject()) {
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-          )
+          ),
+          actions = {
+            if (currentDestination == AppDestinations.HOME) {
+              IconButton(
+                onClick = {onEvent(MainActions.RollbackFromRemote)}
+              ) {
+                Icon(
+                  painter = painterResource(R.drawable.baseline_cloud_download_24),
+                  contentDescription = stringResource(R.string.sync_to_remote)
+                )
+              }
+            }
+          }
         )
       }
     ) { innerPadding ->
