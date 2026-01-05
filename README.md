@@ -6,7 +6,7 @@ Este proyecto es una aplicación de Android que sirve como **capa de presentaci�
 
 |             Pantalla Principal (Dashboard)              |    Pantalla de Generación de Incidentes     |
 |:-------------------------------------------------------:|:-------------------------------------------:|
-| <img src="images/dashboard-enumerado.jpg" width="375"/> | <img src="images/screens.jpg" width="300"/> |
+| <img src="images/dashboard-enumerado.jpg" width="370"/> | <img src="images/screens.jpg" width="300"/> |
 
 ## El SDK de Observabilidad
 
@@ -98,7 +98,7 @@ fun ObservabilityApp(api: ContractObservabilityApi = koinInject()) {
 
 La pantalla principal es el centro de visualización y pruebas del SDK. Las funcionalidades clave, como se muestra en la captura de pantalla, son:
 
-1.  **Icono de Sincronización (Descarga)**: Ubicado en la barra de herramientas superior, este icono permite sincronizar y descargar todos los datos que se han enviado previamente al backend, reemplazando la información local.
+1.  **Icono de Sincronización (Descarga)**: Ubicado en la barra de herramientas superior, este icono permite sincronizar y descargar todos los datos que se han enviado previamente al backend, haciendo un merge con la información local (Si los datos ya estan en el backend, se pueden borrar los datos de la App y con este boton tambien se recuperan).
 2.  **Sección de Filtros**: Permite probar la lógica de filtrado del SDK. Incluye menús desplegables para filtrar los incidentes por:
     *   **Pantalla**: Muestra solo incidentes de una pantalla específica.
     *   **Gravedad**: Filtra por niveles como Debug, Info, Error, etc.
