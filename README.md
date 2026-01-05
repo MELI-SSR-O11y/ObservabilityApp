@@ -122,3 +122,13 @@ La aplicación incluye cuatro pantallas adicionales (`Favorites`, `Profile`, `Us
     -   **Botón "Add Critical Incident"**: Invoca `onEvent(MainActions.InsertIncident(EIncidentSeverity.CRITICAL))`.
 
     Esta funcionalidad permite a los desarrolladores generar rápidamente un conjunto de datos diverso para validar que los incidentes se almacenan correctamente y se visualizan como corresponde en la pantalla del Dashboard.
+
+## Próximos Pasos
+
+A continuación, se detallan algunas de las mejoras planificadas para futuras versiones de la aplicación de prueba y el SDK:
+
+-   **Mejorar el Gráfico de Serie Temporal**: Aunque el gráfico actual muestra los datos correctamente, no se adapta dinámicamente a grandes variaciones en los rangos de tiempo. Se planea aumentar su resolución para que la línea sea más continua. Para ello, se podría optimizar la implementación actual con `Canvas` o integrar una librería de terceros especializada en gráficos.
+
+-   **Optimizar la Experiencia de Usuario (UX)**: Los botones para sincronizar (subir y descargar datos) pueden ser confusos sin un contexto claro. Se propone hacerlos más descriptivos, ya sea con mejores iconos o etiquetas de texto, para asegurar que su importante funcionalidad no sea pasada por alto.
+
+-   **Automatizar la Sincronización en Segundo Plano**: Implementar una solución de sincronización automática utilizando `WorkManager`. Este se encargaría de verificar periódicamente si existen datos locales sin sincronizar y reintentaría enviarlos al servidor, incluso si la aplicación no está en primer plano sin la necesidad de recurrir a los botones con los que actualemnte se soluciona esta situación.
